@@ -6,11 +6,11 @@ Implement a security policy to restrict traffic between departments.
 ## Security Policy
 | Source | Destination | Action |
 |---|---|---|
-| Sales (VLAN 10) | IT (VLAN 20) | Deny ❌ |
-| Sales (VLAN 10) | Servers (VLAN 30) | Allow ✅ |
-| Servers (VLAN 30) | Sales (VLAN 10) | Deny ❌ |
-| Servers (VLAN 30) | IT (VLAN 20) | Deny ❌ |
-| IT (VLAN 20) | Everywhere | Allow ✅ |
+| Sales (VLAN 10) | IT (VLAN 20) | Deny  |
+| Sales (VLAN 10) | Servers (VLAN 30) | Allow  |
+| Servers (VLAN 30) | Sales (VLAN 10) | Deny  |
+| Servers (VLAN 30) | IT (VLAN 20) | Deny  |
+| IT (VLAN 20) | Everywhere | Allow  |
 
 ## What I configured
 - Created extended ACLs on the L3 switch
