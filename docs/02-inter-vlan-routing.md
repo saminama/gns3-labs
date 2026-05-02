@@ -22,5 +22,6 @@ default gateway for that department.
 - Configured trunk ports to carry all VLANs
 
 ## Screenshot
-<img width="945" height="364" alt="screenshotsvlans" src="https://github.com/user-attachments/assets/64132230-457b-42ba-9e0f-5a8fd026ec6c" />
+<img width="942" height="157" alt="screenshotsintervlan" src="https://github.com/user-attachments/assets/5f782f4f-0651-47f5-97dd-895c0f944856" />
+
 
