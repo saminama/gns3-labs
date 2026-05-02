@@ -1,1 +1,188 @@
+Current configuration : 2667 bytes
+!
+upgrade fpd auto
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname router1
+!
+boot-start-marker
+boot-end-marker
+!
+logging message-counter syslog
+enable secret 5 $1$rnNz$3/3bfk1l8.EOxkiMo0dKi/
+!
+no aaa new-model
+ip source-route
+no ip icmp rate-limit unreachable
+ip cef
+!
+!
+ip dhcp excluded-address 10.0.10.254
+ip dhcp excluded-address 10.0.20.254
+ip dhcp excluded-address 10.0.30.254
+!
+ip dhcp pool pool1
+   network 10.0.10.0 255.255.255.0
+   default-router 10.0.10.254
+!
+ip dhcp pool pool2
+   network 10.0.20.0 255.255.255.0
+   default-router 10.0.20.254
+!
+ip dhcp pool pool3
+   network 10.0.30.0 255.255.255.0
+   default-router 10.0.30.254
+!
+!
+no ip domain lookup
+ip domain name itdep123
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+username vlan20 secret 5 $1$j99/$e9xza.F.d7v03XQWV3bqq0
+archive
+ log config
+  hidekeys
+!
+!
+!
+!
+!
+ip tcp synwait-time 5
+ip ssh version 2
+!
+!
+!
+!
+interface FastEthernet0/0
+ no ip address
+ shutdown
+ duplex half
+!
+interface GigabitEthernet1/0
+ ip address 192.168.0.1 255.255.255.252
+ ip nat inside
+ ip virtual-reassembly
+ ip ospf 1 area 0
+ negotiation auto
+!
+interface GigabitEthernet2/0
+ ip address 203.0.113.2 255.255.255.252
+ ip nat outside
+ ip virtual-reassembly
+ negotiation auto
+!
+interface Ethernet3/0
+ no ip address
+ shutdown
+ duplex half
+!
+interface Ethernet3/1
+ no ip address
+ shutdown
+ duplex half
+!
+interface Ethernet3/2
+ no ip address
+ shutdown
+ duplex half
+!
+interface Ethernet3/3
+ no ip address
+ shutdown
+ duplex half
+!
+interface Ethernet3/4
+ no ip address
+ shutdown
+ duplex half
+!
+interface Ethernet3/5
+ no ip address
+ shutdown
+ duplex half
+!
+interface Ethernet3/6
+ no ip address
+ shutdown
+ duplex half
+!
+interface Ethernet3/7
+ no ip address
+ shutdown
+ duplex half
+!
+router ospf 1
+ log-adjacency-changes
+ network 203.0.113.0 0.0.0.3 area 0
+ default-information originate
+!
+ip forward-protocol nd
+ip route 0.0.0.0 0.0.0.0 192.168.56.1
+ip route 0.0.0.0 0.0.0.0 203.0.113.1
+no ip http server
+no ip http secure-server
+!
+!
+ip nat inside source list svi-acl interface GigabitEthernet2/0 overload
+!
+ip access-list extended svi-acl
+ permit ip 10.0.10.0 0.0.0.255 any
+ permit ip 10.0.20.0 0.0.0.255 any
+ permit ip 10.0.30.0 0.0.0.255 any
+ permit ip 192.168.0.0 0.0.0.255 any
+!
+access-list 1 permit 10.0.20.0 0.0.0.255
+no cdp log mismatch duplex
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+gatekeeper
+ shutdown
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line vty 0 4
+ login local
+!
+end
 
