@@ -1,0 +1,162 @@
+Current configuration : 2707 bytes
+!
+! Last configuration change at 09:00:43 UTC Sat May 2 2026
+!
+version 15.0
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname coresw
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging discriminator EXCESS severity drops 6 msg-body drops EXCESSCOLL
+logging buffered 50000
+logging console discriminator EXCESS
+enable secret 5 $1$OP3O$R5UpiqkuCwja12vxVjzgD.
+!
+username vlan20 secret 5 $1$W1I5$bv2aGPueJz15TpNNOjPci.
+no aaa new-model
+no ip icmp rate-limit unreachable
+!
+ip cef
+no ip domain-lookup
+ip domain-name itdep123
+!
+no ipv6 cef
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+ip tcp synwait-time 5
+ip ssh version 2
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 10,20,30,99
+ switchport mode trunk
+ duplex auto
+!
+interface Ethernet0/1
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 10,20,30,99
+ switchport mode trunk
+ duplex auto
+!
+interface Ethernet0/2
+ no switchport
+ ip address 192.168.0.2 255.255.255.252
+ ip ospf 1 area 0
+ duplex auto
+!
+interface Ethernet0/3
+ duplex auto
+!
+interface Ethernet1/0
+ duplex auto
+!
+interface Ethernet1/1
+ duplex auto
+!
+interface Ethernet1/2
+ duplex auto
+!
+interface Ethernet1/3
+ duplex auto
+!
+interface Ethernet2/0
+ duplex auto
+!
+interface Ethernet2/1
+ duplex auto
+!
+interface Ethernet2/2
+ duplex auto
+!
+interface Ethernet2/3
+ duplex auto
+!
+interface Ethernet3/0
+ duplex auto
+!
+interface Ethernet3/1
+ duplex auto
+!
+interface Ethernet3/2
+ duplex auto
+!
+interface Ethernet3/3
+ duplex auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan10
+ ip address 10.0.10.254 255.255.255.0
+ ip access-group vlan10-in in
+ ip helper-address 192.168.0.1
+ ip ospf 1 area 0
+!
+interface Vlan20
+ ip address 10.0.20.254 255.255.255.0
+ ip helper-address 192.168.0.1
+ ip ospf 1 area 0
+!
+interface Vlan30
+ ip address 10.0.30.254 255.255.255.0
+ ip access-group vlan30-in in
+ ip helper-address 192.168.0.1
+ ip ospf 1 area 0
+!
+interface Vlan99
+ ip address 10.0.99.2 255.255.255.0
+!
+router ospf 1
+!
+!
+ip forward-protocol nd
+no ip http server
+!
+!
+!
+ip access-list extended vlan10-in
+ deny   ip 10.0.10.0 0.0.0.255 10.0.20.0 0.0.0.255
+ permit ip any any
+ip access-list extended vlan30-in
+ deny   ip 10.0.30.0 0.0.0.255 10.0.10.0 0.0.0.255
+ deny   ip 10.0.30.0 0.0.0.255 10.0.20.0 0.0.0.255
+ permit ip any any
+access-list 1 permit 10.0.20.0 0.0.0.255
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ access-class 1 in
+ login local
+ transport input ssh
+!
+end
