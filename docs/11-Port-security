@@ -1,1 +1,18 @@
+# Lab 2 — Port Security
 
+## Objective
+Protect access ports from unauthorized devices by limiting which MAC addresses are allowed to communicate on each port.
+
+## Design
+Port Security was configured on all access ports of Switch1 and Switch2 — the ports directly connected to PCs. Sticky MAC learning was used so the switch automatically locks in the first MAC address it sees, avoiding manual configuration for each device.
+
+## What I Configured
+- Enabled Port Security on all access ports using interface range
+- Set violation mode to restrict so unauthorized devices are dropped and logged
+- Enabled sticky MAC learning to automatically lock in the legitimate PC MAC address
+- Verified by swapping a PC on a secured port and confirming a violation log appeared
+
+## Troubleshooting
+- Second PC was still getting an IP and pinging successfully after configuring port security settings — caused by not explicitly enabling port security on the ports. Configuring the settings alone is not enough, port security must be enabled on each port with the base command first before any settings take effect.
+
+## Screenshot
