@@ -15,4 +15,4 @@ Port Security was configured on all access ports of Switch1 and Switch2 — the 
 ## Troubleshooting
 - Second PC was still getting an IP and pinging successfully after configuring port security settings — caused by not explicitly enabling port security on the ports. Configuring the settings alone is not enough, port security must be enabled on each port with the base command first before any settings take effect.
 
-## Screenshot
+
