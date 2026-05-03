@@ -1,1 +1,21 @@
+# Lab 2 — DHCP Snooping & Dynamic ARP Inspection (DAI)
 
+## Objective
+Protect the network against rogue DHCP servers and ARP spoofing attacks by implementing DHCP Snooping and Dynamic ARP Inspection on the access layer switches.
+
+## Design
+Both features were configured in Packet Tracer due to the GNS3 IOU L2 image lacking support for DHCP Snooping trust commands — a known limitation of older experimental IOS images. The topology consists of one router acting as the legitimate DHCP server, one switch, and multiple PCs with one rogue DHCP server connected on an untrusted port.
+
+## What I Configured
+- Enabled DHCP Snooping globally and on all active VLANs
+- Disabled option 82 to prevent legitimate DHCP requests from being dropped
+- Set the port facing the router as trusted, all PC ports left as untrusted
+- Enabled DAI on all active VLANs
+- Configured ARP validation for source MAC, destination MAC, and IP addresses
+- Verified rogue DHCP server was blocked and PCs only received addresses from the legitimate router
+
+## Troubleshooting
+- PCs stopped receiving DHCP addresses after enabling snooping — caused by option 82 being enabled by default, which adds extra information to DHCP packets that the router drops. Fixed by disabling option 82.
+- GNS3 IOU L2 image did not support DHCP Snooping trust command — moved this section to Packet Tracer where the feature is fully supported.
+
+## Screenshot
