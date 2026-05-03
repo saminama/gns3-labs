@@ -1,1 +1,20 @@
+# EtherChannel (LACP)
+
+## Objective
+Bundle the redundant links between coreSW1↔Switch1 and coreSW1↔Switch2 into single logical links using LACP to increase bandwidth and provide link redundancy.
+
+## Design
+Two EtherChannel bundles were created — Po1 between coreSW1 and Switch1, and Po2 between coreSW1 and Switch2. Each bundle consists of two physical links configured as LACP active on both sides.
+
+## What I Configured
+- Configured both physical links on each side as trunk ports with all VLANs allowed
+- Created EtherChannel bundle between coreSW1 and Switch1 using LACP
+- Created EtherChannel bundle between coreSW1 and Switch2 using LACP
+- Verified STP still recognizes coreSW1 as root and sees the bundles as single logical links
+
+## Troubleshooting
+- Ports were not showing in `show interfaces trunk` because they were administratively shut down — had to enable them first
+- EtherChannel Po2 was not coming up because trunk mode and VLAN allowance were not configured on the physical ports before creating the bundle — always configure trunk settings first, then create the EtherChannel
+
+## Screenshot
 
