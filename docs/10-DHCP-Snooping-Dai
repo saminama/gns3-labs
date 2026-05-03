@@ -18,4 +18,5 @@ Both features were configured in Packet Tracer due to the GNS3 IOU L2 image lack
 - PCs stopped receiving DHCP addresses after enabling snooping — caused by option 82 being enabled by default, which adds extra information to DHCP packets that the router drops. Fixed by disabling option 82.
 - GNS3 IOU L2 image did not support DHCP Snooping trust command — moved this section to Packet Tracer where the feature is fully supported.
 
-## Screenshot
+
+
