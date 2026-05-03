@@ -17,5 +17,6 @@ Two EtherChannel bundles were created — Po1 between coreSW1 and Switch1, and P
 - EtherChannel Po2 was not coming up because trunk mode and VLAN allowance were not configured on the physical ports before creating the bundle — always configure trunk settings first, then create the EtherChannel
 
 ## Screenshot
+[Etherchannel](ETHerchannel.png)
 
 
